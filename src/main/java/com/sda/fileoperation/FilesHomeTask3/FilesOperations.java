@@ -23,10 +23,6 @@ public class FilesOperations {
             studentListMap.put(students.indexOf(student) + 1, student);
         }
 
-        // Converting list to string
-//        List<String> lines = new ArrayList<String>();
-//        students.forEach( student -> lines.add(student.getName() + " " + student.getSurname() + " " + student.getAge()));
-
         //  Writing map to file
         Path filePath = Paths.get("C:\\Users\\Twoja stara\\Desktop\\projekty\\Java\\1Kurs\\Projekty\\HelloMavenApplication\\listOfStudents.txt");
         try (Writer writer = Files.newBufferedWriter(filePath)) {
@@ -40,16 +36,6 @@ public class FilesOperations {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //Writing map to file method 2, map to String
-//            try {
-//                List<String> lines = new ArrayList<String>();
-//                studentListMap.forEach((key, value) -> lines.add(key + " " + value.getName() + " " + value.getSurname() + " age: " + value.getAge()));
-//                Path filePath = Paths.get("C:\\Users\\Twoja stara\\Desktop\\projekty\\Java\\1Kurs\\Projekty\\HelloMavenApplication\\listOfStudents.txt");
-//                Files.write(filePath, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
-//            } catch (IOException e) {
-//                System.out.println(e.getMessage());
-//            }
 
         // Serialization
 
