@@ -1,0 +1,10 @@
+1 Zuzanna Król age: 31
+2 Joanna Nowak age: 37
+3 Patrycja Dudek age: 21
+4 Patryk Wójcik age: 34
+5 Joanna Kowalczyk age: 37
+6 Patryk Dudek age: 28
+7 Patryk Król age: 31
+8 Adam Mazur age: 23
+9 Joanna Krawczyk age: 35
+10 Andrzej Nowak age: 18
