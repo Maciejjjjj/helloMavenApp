@@ -34,7 +34,7 @@ public class FilesOperations {
                 }
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 
         // Serialization
@@ -43,43 +43,38 @@ public class FilesOperations {
 
         studentListMap.forEach((key, value) -> lines.put(key, value.getName() + " " + value.getSurname() + " age: " + value.getAge()));
 
-        try {
-            FileOutputStream fos =
-                    new FileOutputStream("C:\\Users\\Twoja stara\\Desktop\\projekty\\Java\\1Kurs\\Projekty\\HelloMavenApplication\\listOfStudents.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fos);
+        try(FileOutputStream fos = new FileOutputStream("C:\\Users\\Twoja stara\\Desktop\\projekty\\Java\\1Kurs\\Projekty\\HelloMavenApplication\\listOfStudents.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fos))
+        {
             out.writeObject(lines);
-            out.close();
-            fos.close();
+
             System.out.println("Serialized data is saved in listOfStudents.ser");
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 
 
-        Map<Integer, Student> deserializedStudentListMap = null;
+        Map<Integer, Student> deserializedStudentListMap;
 
-        try {
-            FileInputStream fis = new FileInputStream("C:\\Users\\Twoja stara\\Desktop\\projekty\\Java\\1Kurs\\Projekty\\HelloMavenApplication\\listOfStudents.ser");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            deserializedStudentListMap = (HashMap) ois.readObject();
-            ois.close();
-            fis.close();
+        try (FileInputStream fis = new FileInputStream("C:\\Users\\Twoja stara\\Desktop\\projekty\\Java\\1Kurs\\Projekty\\HelloMavenApplication\\listOfStudents.ser");
+             ObjectInputStream ois = new ObjectInputStream(fis))
+        {
+            deserializedStudentListMap = (HashMap<Integer, Student>) ois.readObject();
+
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            ioe.getMessage();
             return;
         } catch (ClassNotFoundException c) {
             System.out.println("Class not found");
-            c.printStackTrace();
+            c.getMessage();
             return;
         }
+
         System.out.println("Deserialized HashMap..");
 
-        Set set = deserializedStudentListMap.entrySet();
-        Iterator iterator = set.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry mapEntry = (Map.Entry) iterator.next();
-            System.out.print(mapEntry.getKey() + ". ");
-            System.out.println(mapEntry.getValue());
+        for (Map.Entry<Integer, Student> entry : deserializedStudentListMap.entrySet() ){
+            System.out.print(entry.getKey() + ". ");
+            System.out.println(entry.getValue());
         }
     }
 }
